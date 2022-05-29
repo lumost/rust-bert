@@ -224,7 +224,7 @@ pub enum Cache {
     None,
 }
 
-pub(crate) mod private_generation_utils {
+pub mod private_generation_utils {
     use std::cmp::{max, min};
     use std::collections::HashMap;
     use std::mem;
