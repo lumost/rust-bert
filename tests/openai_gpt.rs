@@ -1,5 +1,6 @@
+use rust_bert::gpt2::Gpt2Config;
 use rust_bert::openai_gpt::{
-    OpenAIGPTLMHeadModel, OpenAiGptConfig, OpenAiGptConfigResources, OpenAiGptMergesResources,
+    OpenAIGPTLMHeadModel, OpenAiGptConfigResources, OpenAiGptMergesResources,
     OpenAiGptModelResources, OpenAiGptVocabResources,
 };
 use rust_bert::pipelines::common::ModelType;
@@ -38,7 +39,7 @@ fn openai_gpt_lm_model() -> anyhow::Result<()> {
         merges_path.to_str().unwrap(),
         true,
     )?;
-    let config = OpenAiGptConfig::from_file(config_path);
+    let config = Gpt2Config::from_file(config_path);
     let openai_gpt = OpenAIGPTLMHeadModel::new(&vs.root(), &config);
     vs.load(weights_path)?;
 

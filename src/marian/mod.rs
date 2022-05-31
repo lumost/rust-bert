@@ -60,7 +60,7 @@
 mod marian_model;
 
 pub use marian_model::{
-    MarianConfig, MarianConfigResources, MarianForConditionalGeneration, MarianGenerator,
-    MarianModelPreset, MarianModelResources, MarianSourceLanguages, MarianSpmResources,
-    MarianTargetLanguages, MarianVocabResources,
+    MarianConfigResources, MarianForConditionalGeneration, MarianGenerator, MarianModelPreset,
+    MarianModelResources, MarianSourceLanguages, MarianSpmResources, MarianTargetLanguages,
+    MarianVocabResources,
 };
