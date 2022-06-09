@@ -64,7 +64,7 @@ features = ["doc-only"]
 
 [dependencies]
 rust_tokenizers = "~7.0.2"
-tch = "~0.7.2"
+tch = {git="ssh://git@github.com/lumost/tch-rs.git"}
 serde_json = "1.0.81"
 serde = { version = "1.0.137", features = ["derive"] }
 ordered-float = "3.0.0"
