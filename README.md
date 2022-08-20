@@ -32,35 +32,36 @@ The tasks currently supported include:
   - Named Entity Recognition
   - Part of Speech tagging
   - Question-Answering
-  - Language Generation.
+  - Language Generation
+  - Sentence Embeddings
 
 <details>
 <summary> <b>Expand to display the supported models/tasks matrix </b> </summary>
 
-| |**Sequence classification**|**Token classification**|**Question answering**|**Text Generation**|**Summarization**|**Translation**|**Masked LM**|
-:-----:|:----:|:----:|:-----:|:----:|:-----:|:----:|:----:
-DistilBERT|✅|✅|✅| | | |✅| 
-MobileBERT|✅|✅|✅| | | |✅| 
-DeBERTa|✅|✅|✅| | | |✅| 
-DeBERTa (v2)|✅|✅|✅| | | |✅| 
-FNet|✅|✅|✅| | | |✅| 
-BERT|✅|✅|✅| | | |✅| 
-RoBERTa|✅|✅|✅| | | |✅| 
-GPT| | | |✅ | | | | 
-GPT2| | | |✅ | | | | 
-GPT-Neo| | | |✅ | | | | 
-BART|✅| | |✅ |✅| | |
-Marian| | | |  | |✅| | 
-MBart|✅| | |✅ | | | | 
-M2M100| | | |✅ | | | | 
-Electra | |✅| | | | |✅| 
-ALBERT |✅|✅|✅| | | |✅| 
-T5 | | | |✅ |✅|✅| | 
-XLNet|✅|✅|✅|✅ | | |✅| 
-Reformer|✅| |✅|✅ | | |✅| 
-ProphetNet| | | |✅ |✅ | | | 
-Longformer|✅|✅|✅| | | |✅| 
-Pegasus| | | | |✅| | | 
+| |**Sequence classification**|**Token classification**|**Question answering**|**Text Generation**|**Summarization**|**Translation**|**Masked LM**|**Sentence Embeddings**|
+:-----:|:----:|:----:|:-----:|:----:|:-----:|:----:|:----:|:----:
+DistilBERT|✅|✅|✅| | | |✅| ✅| 
+MobileBERT|✅|✅|✅| | | |✅| |
+DeBERTa|✅|✅|✅| | | |✅| |
+DeBERTa (v2)|✅|✅|✅| | | |✅| |
+FNet|✅|✅|✅| | | |✅| |
+BERT|✅|✅|✅| | | |✅| ✅|
+RoBERTa|✅|✅|✅| | | |✅| ✅| 
+GPT| | | |✅ | | | |  |
+GPT2| | | |✅ | | | |  |
+GPT-Neo| | | |✅ | | | | | 
+BART|✅| | |✅ |✅| | | |
+Marian| | | |  | |✅| |  |
+MBart|✅| | |✅ | | | |  |
+M2M100| | | |✅ | | | |  |
+Electra | |✅| | | | |✅|  |
+ALBERT |✅|✅|✅| | | |✅| ✅ |
+T5 | | | |✅ |✅|✅| | ✅ |
+XLNet|✅|✅|✅|✅ | | |✅|  |
+Reformer|✅| |✅|✅ | | |✅|  |
+ProphetNet| | | |✅ |✅ | | |  |
+Longformer|✅|✅|✅| | | |✅|  |
+Pegasus| | | | |✅| | |  |
 </details>
 
 ## Getting started
@@ -74,8 +75,8 @@ This cache location defaults to `~/.cache/.rustbert`, but can be changed by sett
 
 ### Manual installation (recommended)
 
-1. Download `libtorch` from https://pytorch.org/get-started/locally/. This package requires `v1.11.0`: if this version is no longer available on the "get started" page,
-the file should be accessible by modifying the target link, for example `https://download.pytorch.org/libtorch/cu113/libtorch-shared-with-deps-1.11.0%2Bcu113.zip` for a Linux version with CUDA11.
+1. Download `libtorch` from https://pytorch.org/get-started/locally/. This package requires `v1.12.0`: if this version is no longer available on the "get started" page,
+the file should be accessible by modifying the target link, for example `https://download.pytorch.org/libtorch/cu116/libtorch-cxx11-abi-shared-with-deps-1.12.0%2Bcu116.zip` for a Linux version with CUDA11.
 2. Extract the library to a location of your choice
 3. Set the following environment variables
 ##### Linux:
@@ -376,6 +377,31 @@ Output:
     Entity { word: "name", score: 0.6565, label: "NN" }
     Entity { word: "is", score: 0.3697, label: "VBZ" }
     Entity { word: "Bob", score: 0.7460, label: "NNP" }
+]
+```
+</details>
+&nbsp;  
+<details>
+<summary> <b>10. Sentence embeddings </b> </summary>
+
+Generate sentence embeddings (vector representation). These can be used for applications including dense information retrieval.
+```rust
+    let model = SentenceEmbeddingsBuilder::remote(
+            SentenceEmbeddingsModelType::AllMiniLmL12V2
+        ).create_model()?;
+
+    let sentences = [
+        "this is an example sentence", 
+        "each sentence is converted"
+    ];
+    
+    let output = model.predict(&sentences);
+```
+Output:
+```
+[
+    [-0.000202666, 0.08148022, 0.03136178, 0.002920636 ...],
+    [0.064757116, 0.048519745, -0.01786038, -0.0479775 ...]
 ]
 ```
 </details>
