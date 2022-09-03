@@ -649,6 +649,7 @@ pub mod reformer;
 pub mod roberta;
 pub mod t5;
 pub mod xlnet;
+pub mod memnet;
 
 pub use common::error::RustBertError;
 pub use common::resources;
